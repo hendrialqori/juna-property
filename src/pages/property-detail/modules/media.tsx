@@ -3,8 +3,12 @@ import React from "react"
 import Viewer from "react-pannellum"
 
 export default function Media() {
-
     const ref = React.useRef<HTMLDivElement | null>(null)
+
+    React.useEffect(() => {
+        // issue
+        window.scrollTo(0, 0)
+    }, [])
 
     return (
         <div className="w-full space-y-4">
