@@ -4,6 +4,7 @@ import { LuBedDouble } from "react-icons/lu";
 import { MdOutlineWidthWide } from "react-icons/md";
 import useModal from "#/components/modal/use-modal";
 import ModalBooking from "./modal-booking";
+import { Link } from "react-router";
 
 export default function Description() {
 
@@ -30,13 +31,13 @@ export default function Description() {
                     <p className="text-xs md:text-sm font-medium">600m2</p>
                 </div>
             </div>
-            <p className="text-xs md:text-sm xl:text-base leading-[17 0%]">
+            <p className="text-xs md:text-sm xl:text-base leading-[170%]">
                 Rumah type 21 ini dibangun di atas lahan luas 600m², memberikan keleluasaan untuk berbagai kebutuhan Anda. Memiliki 4 kamar tidur yang nyaman dan 1 kamar mandi, rumah ini dirancang dengan fungsionalitas dan kenyamanan. Lokasinya sangat strategis, dekat dengan fasilitas umum seperti sekolah, pusat perbelanjaan, dan transportasi, menjadikannya pilihan ideal untuk keluarga. Dengan halaman yang luas, Anda dapat menambahkan taman, area bermain, atau parkir kendaraan. Rumah ini menawarkan kombinasi sempurna ant ara hunian praktis dan investasi jangka panjang.
             </p>
-            <button className="w-auto flex items-center justify-center gap-3 bg-black text-white rounded-lg py-3 px-5" onClick={modalBooking.onOpen}>
+            <Link to={{ pathname: "/property/booking/1" }} className="w-max flex items-center justify-center gap-3 bg-black text-white rounded-lg py-3 px-5">
                 <span className="text-[0.65rem] md:text-xs xl:text-sm font-medium">Booking sekarang</span>
                 <HiArrowNarrowRight />
-            </button>
+            </Link>
             <ModalBooking {...modalBooking} />
         </div>
     )
