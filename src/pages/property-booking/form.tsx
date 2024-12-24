@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form"
 import { z } from "zod"
 import { zodResolver } from "@hookform/resolvers/zod"
 import Upload from "./upload"
+import Button from "#/components/ui/button"
 
 const scheme = z.object({
     name: z.string().min(1, { message: "Required" }),
@@ -21,6 +22,9 @@ const scheme = z.object({
         .refine((images: FileList) => images?.[0]?.name, "Required")
         .transform((images: FileList) => images).optional(),
     last_salary_slip_image: z.any()
+        .refine((images: FileList) => images?.[0]?.name, "Required")
+        .transform((images: FileList) => images).optional(),
+    proof_of_transafer_image: z.any()
         .refine((images: FileList) => images?.[0]?.name, "Required")
         .transform((images: FileList) => images).optional(),
     address: z.string().min(1, { message: "Required" })
@@ -56,6 +60,11 @@ export default function Form() {
     const last_salary_slip_image = {
         file: (watch("last_salary_slip_image") as FileList)?.[0],
         onReset: () => reset((value) => ({ ...value, last_salary_slip_image: {} as FileList }))
+    }
+
+    const proof_of_transafer_image = {
+        file: (watch("proof_of_transafer_image") as FileList)?.[0],
+        onReset: () => reset((value) => ({ ...value, proof_of_transafer_image: {} as FileList }))
     }
 
     return (
@@ -106,6 +115,12 @@ export default function Form() {
             </div>
 
             <div className="space-y-1">
+                <label htmlFor="transfer" className="text-xs md:text-[0.8rem] text-gray-800">Bukti Transfer</label>
+                <Upload id="transafer" file={proof_of_transafer_image.file} onReset={proof_of_transafer_image.onReset} {...register("proof_of_transafer_image")} />
+                {errors.proof_of_transafer_image && <span className="text-red-500 text-xs font-medium">{errors.proof_of_transafer_image.message}</span>}
+            </div>
+
+            <div className="space-y-1">
                 <label className="text-xs md:text-[0.8rem] text-gray-800">Uang muka</label>
                 <Input value="Rp 2,000,000 .-" disabled />
             </div>
@@ -115,9 +130,10 @@ export default function Form() {
                 {errors.address && <span className="text-red-500 text-xs font-medium">{errors.address.message}</span>}
             </div>
             <div />
-            <button className="w-auto ml-auto mr-0 flex gap-3 bg-black text-white rounded-lg py-3 px-8">
-                <span className="font-medium text-xs md:text-sm">Booking</span>
-            </button>
+            <div />
+            <Button className="ml-auto mr-0">
+                Booking
+            </Button>
         </form>
     )
 }

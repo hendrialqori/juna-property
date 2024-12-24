@@ -1,11 +1,15 @@
 import AdminLayout from "#/components/admin-layout";
 import useModal from "#/components/modal/use-modal";
-import ModalAddProperty from "./modules/modal-add-property";
+import Button from "#/components/ui/button";
+import { useProperties } from "#/services/property-service";
+import ModalAddProperty from "./modules/modal-add";
 import PropertyCard from "./modules/property-card";
 import PropertyCardList from "./modules/property-card-list";
 
 export default function Property() {
-    const modalAddProperty = useModal("modal-add-property")
+    const modalAddProperty = useModal()
+
+    const properties = useProperties()
 
     return (
         <AdminLayout>
@@ -14,15 +18,14 @@ export default function Property() {
                     <h2 className="text-base xl:text-xl font-semibold -tracking-wide">Properties</h2>
                     <p className="text-xs xl:text-sm text-gray-500">Daftar properti yang sudah dibangun oleh developer</p>
                 </div>
-                <button className="w-max bg-black text-white rounded-[10px] py-3 px-8 font-medium text-xs xl:text-sm" onClick={modalAddProperty.onOpen}>
+                <Button onClick={modalAddProperty.onOpen}>
                     Tambah properti
-                </button>
+                </Button>
             </div>
-            <PropertyCardList>
-                <PropertyCard />
-                <PropertyCard />
-                <PropertyCard />
-                <PropertyCard />
+            <PropertyCardList fetchStatus={properties.status}>
+                {properties.data?.data.map((property) => (
+                    <PropertyCard key={property.id} {...property} />
+                ))}
             </PropertyCardList>
 
             <ModalAddProperty {...modalAddProperty} />

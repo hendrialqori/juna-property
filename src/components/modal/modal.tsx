@@ -62,6 +62,7 @@ Modal.Title = ({ ref, ...rest }: ModalTitleProps) => {
 
 interface ModalCloseProps extends ComponentPropsWithoutRef<"button"> { ref?: LegacyRef<HTMLButtonElement> }
 Modal.Close = ({ ref, ...rest }: ModalCloseProps) => {
+
     return (
         <button ref={ref} className="text-xl hover:outline hover:outline-black rounded-md" type="button" {...rest}>
             <IoClose />

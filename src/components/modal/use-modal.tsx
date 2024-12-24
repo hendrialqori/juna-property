@@ -1,22 +1,11 @@
-import { useSearchParams } from "react-router";
+import React from "react";
 
-export default function useModal(key: string) {
-    const [queryParams, setQueryParams] = useSearchParams()
+export default function useModal() {
 
-    const isOpen = !!queryParams.get(key)
+    const [isOpen, setOpen] = React.useState(false)
 
-    const handleOpen = () => {
-        setQueryParams((prev) => {
-            prev.set(key, "true")
-            return prev
-        })
-    }
-    const handleClose = () => {
-        setQueryParams((prev) => {
-            prev.delete(key)
-            return prev
-        })
-    }
+    const handleOpen = () => setOpen(true)
+    const handleClose = () => setOpen(false)
 
     return { isOpen, onOpen: handleOpen, onClose: handleClose }
 }

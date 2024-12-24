@@ -9,7 +9,7 @@ export default function AppRoute() {
                 <Route path="/" element={<Page.Home />} />
                 <Route path="/property/:slug" element={<Page.PropertyDetail />} />
                 <Route path="/property/booking/:id" element={<Page.PropertyBooking />} />
-                <Route path="/admin/sign-in" element={<Page.SignIn />} />
+                <Route path="/admin/signin" element={<Page.SignIn />} />
 
                 <Route path="/admin" element={<ProtectRoute />}>
                     <Route path="property" element={<Page.Property />} />

@@ -2,13 +2,10 @@ import { HiArrowNarrowRight } from "react-icons/hi";
 import { LuBath } from "react-icons/lu";
 import { LuBedDouble } from "react-icons/lu";
 import { MdOutlineWidthWide } from "react-icons/md";
-import useModal from "#/components/modal/use-modal";
-import ModalBooking from "./modal-booking";
 import { Link } from "react-router";
+import Button from "#/components/ui/button";
 
 export default function Description() {
-
-    const modalBooking = useModal("modal-booking")
 
     return (
         <div aria-label="description" className="space-y-5 xl:space-y-7">
@@ -34,11 +31,12 @@ export default function Description() {
             <p className="text-xs md:text-sm xl:text-base leading-[170%]">
                 Rumah type 21 ini dibangun di atas lahan luas 600m², memberikan keleluasaan untuk berbagai kebutuhan Anda. Memiliki 4 kamar tidur yang nyaman dan 1 kamar mandi, rumah ini dirancang dengan fungsionalitas dan kenyamanan. Lokasinya sangat strategis, dekat dengan fasilitas umum seperti sekolah, pusat perbelanjaan, dan transportasi, menjadikannya pilihan ideal untuk keluarga. Dengan halaman yang luas, Anda dapat menambahkan taman, area bermain, atau parkir kendaraan. Rumah ini menawarkan kombinasi sempurna ant ara hunian praktis dan investasi jangka panjang.
             </p>
-            <Link to={{ pathname: "/property/booking/1" }} className="w-max flex items-center justify-center gap-3 bg-black text-white rounded-lg py-3 px-5">
-                <span className="text-[0.65rem] md:text-xs xl:text-sm font-medium">Booking sekarang</span>
-                <HiArrowNarrowRight />
-            </Link>
-            <ModalBooking {...modalBooking} />
+            <Button asChild className="flex items-center justify-center gap-3">
+                <Link to={{ pathname: "/property/booking/1" }}>
+                    <span className="text-[0.65rem] md:text-xs xl:text-sm font-medium">Booking sekarang</span>
+                    <HiArrowNarrowRight />
+                </Link>
+            </Button>
         </div>
     )
 }

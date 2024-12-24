@@ -36,7 +36,7 @@ export default function AdminLayout({ children }: Props) {
                 initial={{ x: 0 }}
                 animate={{ x: show ? 0 : "-100%" }}
                 transition={{ bounce: false, duration: 0.5 }}
-                className="bg-white border-r border-[#F2F4F7] fixed lg:sticky z-[10] top-0 h-dvh px-3 xl:px-5 py-3 shadow-md space-y-5"
+                className="bg-white border-r border-[#F2F4F7] fixed lg:sticky z-[11] top-0 h-dvh px-3 xl:px-5 py-3 shadow-md space-y-5"
             >
                 <div className="flex justify-between items-start">
                     <Link to={{ pathname: "/" }}>
@@ -62,7 +62,7 @@ export default function AdminLayout({ children }: Props) {
                     />
                 </Menu>
             </motion.aside>
-            <section className="relative bg-gray-50 px-4 py-12 xl:px-8 xl:py-8 w-full max-w-[1800px] mx-auto">
+            <section className="relative bg-gray-50 px-4 py-12 xl:px-8 xl:py-8 w-full max-w-[1800px] min-h-dvh mx-auto">
                 {children}
             </section>
         </main>

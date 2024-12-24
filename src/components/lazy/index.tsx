@@ -1,3 +1,4 @@
+import ReactDOM from "react-dom";
 import { CgSpinner } from "react-icons/cg";
 
 export function FallbackPage() {
@@ -16,12 +17,13 @@ export function FallbackPage() {
 
 export function LoadingScreen({ show, message }: { show: boolean; message: string }) {
     if (!show) return null
-    return (
-        <div className="absolute inset-0 flex justify-center items-center bg-black/60 z-10">
+
+    return ReactDOM.createPortal(
+        <div className="fixed inset-0 flex justify-center items-center bg-white/70 z-[60]">
             <div className="flex justify-center items-center gap-2">
-                <CgSpinner className="text-xl animate-spin text-white" />
-                <span className="font-medium text-sm text-white">{message}</span>
+                <CgSpinner className="text-lg md:text-xl animate-spin text-black" />
+                <span className="font-medium text-xs md:text-sm text-black">{message}</span>
             </div>
         </div>
-    )
+        , document.body)
 }
