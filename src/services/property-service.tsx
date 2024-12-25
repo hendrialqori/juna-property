@@ -16,6 +16,19 @@ export function useProperties() {
     })
 }
 
+export function useProperty(id: string) {
+    const GET = async ({ signal }: { signal: AbortSignal }) => {
+        const req = await request.get(`/property/get/${id}`, { signal })
+        return req.data
+    }
+
+    return useQuery<Success<Property>, AxiosError<Error>>({
+        queryKey: ["PROPERTY", id],
+        queryFn: GET,
+        enabled: Boolean(id)
+    })
+}
+
 export function useAddProperty() {
     type Paylod = { formData: FormData }
     const POST = async ({ formData }: Paylod) => {
@@ -25,6 +38,18 @@ export function useAddProperty() {
 
     return useMutation<Success<Property>, AxiosError<Error>, Paylod>({
         mutationFn: POST
+    })
+}
+
+export function useUpdateProperty() {
+    type Paylod = { id: string; formData: FormData }
+    const PUT = async ({ id, formData }: Paylod) => {
+        const req = await request.put(`/property/update/${id}`, formData)
+        return req.data
+    }
+
+    return useMutation<Success<Property>, AxiosError<Error>, Paylod>({
+        mutationFn: PUT
     })
 }
 

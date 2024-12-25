@@ -7,7 +7,7 @@ export default function AppRoute() {
         <BrowserRouter>
             <Routes>
                 <Route path="/" element={<Page.Home />} />
-                <Route path="/property/:slug" element={<Page.PropertyDetail />} />
+                <Route path="/property/:id" element={<Page.PropertyDetail />} />
                 <Route path="/property/booking/:id" element={<Page.PropertyBooking />} />
                 <Route path="/admin/signin" element={<Page.SignIn />} />
 

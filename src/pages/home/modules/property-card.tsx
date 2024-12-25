@@ -1,37 +1,41 @@
-import { LuBedDouble } from "react-icons/lu";
-import { MdOutlineWidthWide } from "react-icons/md";
 import { HiArrowNarrowRight } from "react-icons/hi";
 import { Link } from "react-router";
+import Button from "#/components/ui/button";
+import { Property } from "#/@types";
+import { priceFormat } from "#/lib/utils";
 
-export default function PropertyCard() {
+export function Card(props: Property) {
     return (
         <figure className="rounded-2xl overflow-hidden font-inter">
-            <img src="/rumah2.jpg" className="h-36 w-full object-cover" alt="avatar" />
+            <img src={props.thumbnail_url} className="h-36 w-full object-cover" alt="avatar" />
             <figure className="bg-[#F1F4F9] p-4 md:p-5 space-y-4 md:space-y-6">
                 <div className="space-y-1">
-                    <h2 className="font-bold text-xs md:text-sm xl:text-base">Rp 900jt</h2>
-                    <div className="text-[0.65rem] md:text-xs xl:text-sm">
-                        <p className="font-medium">Properti</p>
-                        <p className="text-gray-500">Jalan raya batam no.21 Batam - Kepri</p>
-                    </div>
+                    <p className="text-[0.65rem] md:text-xs xl:text-sm font-medium">Tipe {props.type}</p>
+                    <h2 className="font-semibold -tracking-wide text-xs md:text-sm xl:text-base">Rp {priceFormat(props.price)}</h2>
+                    <p className="text-[0.65rem] md:text-xs xl:text-sm text-gray-500 line-clamp-2">{props.description}</p>
                 </div>
-                <div className="flex items-center gap-4 pb-4">
-                    <div className="flex items-center gap-1">
-                        <LuBedDouble className="text-sm md:text-base xl:text-lg" />
-                        <p className="text-xs font-medium text-gray-500">4 Kamar</p>
-                    </div>
-                    <div className="flex items-center gap-1">
-                        <MdOutlineWidthWide className="text-sm md:text-base xl:text-lg" />
-                        <p className="text-xs font-medium text-gray-500">600m2</p>
-                    </div>
-                </div>
-                <Link to={{ pathname: "/property/1" }}>
-                    <div className="w-full flex items-center justify-center gap-3 bg-black text-white rounded-xl py-3">
+                <Button asChild className="flex items-center justify-center gap-3 w-full">
+                    <Link to={{ pathname: `/property/${props.id}` }}>
                         <span className="text-[0.65rem] md:text-xs xl:text-sm font-medium">Lihat detail</span>
                         <HiArrowNarrowRight />
-                    </div>
-                </Link>
+                    </Link>
+                </Button>
             </figure>
+        </figure>
+    )
+}
+
+export function Skeleton() {
+    return (
+        <figure className="rounded-2xl overflow-hidden font-inter bg-[#F1F4F9]">
+            <div className="h-36 w-full bg-gray-200 animate-pulse" />
+            <div className="px-4 md:px-5 space-y-4 mt-3">
+                <div className="bg-gray-200 h-5 w-16 rounded-md animate-pulse" />
+                <div className="bg-gray-200 h-8 w-full rounded-md animate-pulse" />
+            </div>
+            <div className="p-4 md:p-5">
+                <div className="bg-gray-200 h-10 w-full rounded-md animate-pulse" />
+            </div>
         </figure>
     )
 }

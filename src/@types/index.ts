@@ -38,6 +38,7 @@ export type Property = {
     price: number;
     thumbnail_url: string;
     view_url: string;
+    address: string;
     description: string;
     created_at: Date;
     updated_at: Date;

@@ -1,22 +1,43 @@
-import { HiArrowNarrowRight } from "react-icons/hi";
+import React from "react";
+import { FetchStatus } from "#/@types";
+import * as Property from "./property-card"
 
-interface Props { children: React.ReactNode }
+interface Props {
+    fetchStatus: FetchStatus
+    children: React.ReactNode
+}
 
-export default function PropertyCardList({ children }: Props) {
-    return (
-        <div className="space-y-8 xl:space-y-16 pt-16 xl:pt-10">
+export default function PropertyCardList({ fetchStatus, children }: Props) {
+
+    if (fetchStatus === "pending") {
+        return (
+            <Grid>
+                {Array.from({ length: 6 }).map((_, i) => <Property.Skeleton key={i} />)}
+            </Grid>
+        )
+    }
+
+    const count = React.Children.count(children)
+    if (!count) {
+        return (
             <div>
-                <h2 className="text-base md:text-xl xl:text-3xl font-semibold">Properti Terbaru</h2>
-                <div className="flex items-center gap-3">
-                    <p className="text-xs text-gray-500 font-medium">Daftar properti kami yang baru selesai</p>
-                    <div className="grid place-items-center size-6 rounded-full bg-slate-100">
-                        <HiArrowNarrowRight />
-                    </div>
-                </div>
+                <p className="text-xs md:text-sm font-medium">Properti belum tersedia</p>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4">
-                {children}
-            </div>
+        )
+    }
+
+    return (
+        <Grid>
+            {children}
+        </Grid>
+    )
+}
+
+
+function Grid({ children }: Pick<Props, "children">) {
+    return (
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4">
+            {children}
         </div>
     )
 }
